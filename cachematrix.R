@@ -1,8 +1,3 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
 # This function takes a matrix as a parameter, and provides a
 # modular interface (by way of the functions defined within it) 
 # to store and retrieve a cache of the matrix inverse.
@@ -47,9 +42,6 @@ makeCacheMatrix <- function(x = matrix()) {
 		 getinv	= getinv)
 }
 
-
-## Write a short comment describing this function
-
 # This function returns the inverse of a matrix enclosed 
 # in the parameter x. The parameter x is expected to have been
 # created by the the makeCacheMatrix() function.
@@ -65,7 +57,11 @@ cacheSolve <- function(x, ...) {
 	# halt if the calls to the functions in x fail.
 	
 	if (!is.list(x)) stop("x is not a list")
-	if (!identical(sort(attributes(x)$names), c("get", "getinv", "set", "setinv"))) stop("x does not contain expected interface")
+	
+	expectedNames <- c("get", "getinv", "set", "setinv")
+	if (!identical(sort(attributes(x)$names), expectedNames)) {
+		stop("x does not contain expected interface")
+	}
 
 	# Try to retrieve the cached inverse
 	i <- x$getinv()
